@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { adaptRoute } from '../../adapters/express-route.adapter';
-import { makeAdsController } from '../../factories/ads';
+import { makeCreateAdsController, makeGetUserDiscordByAdsId } from '../../factories/ads';
 
 export default (router: Router): void => {
-  router.get('/ads', adaptRoute(makeAdsController()));
+  router.post('/games/:gameId/ads', adaptRoute(makeCreateAdsController()));
+  router.get('/ads/:adId/discord', adaptRoute(makeGetUserDiscordByAdsId()));
 }

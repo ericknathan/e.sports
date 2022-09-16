@@ -1,10 +1,10 @@
-export interface HttpResponse {
+export interface HttpResponse<BodyType = any> {
   statusCode: number;
-  body: any;
+  body: BodyType;
 }
 
-export interface HttpRequest {
-  body?: any;
+export interface HttpRequest<BodyType = any> {
+  body?: BodyType;
   params?: any;
   user?: {
     id: string;
