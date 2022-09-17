@@ -21,11 +21,11 @@ export function DuoCard({ data, onConnect }: DuoCardProps) {
       />
       <DuoInfo
         label="Tempo de jogo"
-        value={`${data.yearsPlaying} ano${data.yearsPlaying > 1 && 's'}`}
+        value={`${data.yearsPlaying} ano${data.yearsPlaying > 1 ? 's' : ''}`}
       />
       <DuoInfo
         label="Disponibilidade"
-        value={`${data.weekDays.length} dia${data.weekDays.length > 1 && 's'} • ${data.hourStart} - ${data.hourEnd}`}
+        value={`${data.weekDays.length} dia${data.weekDays.length > 1 ? 's' : ''} • ${data.hourStart} - ${data.hourEnd}`}
       />
       <DuoInfo
         label="Chamada de áudio?"

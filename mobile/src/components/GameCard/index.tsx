@@ -31,7 +31,7 @@ export function GameCard({ data, ...props }: GameCardComponentProps) {
           </Text>
 
           <Text style={styles.ads}>
-            {data.ads} anúncio{data.ads > 1 && 's'}
+            {data.ads} anúncio{data.ads > 1 ? 's' : ''}
           </Text>
         </LinearGradient>
       </ImageBackground>
