@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import * as Dialog from '@radix-ui/react-dialog';
 import { GameModel } from '@/domain/models/game';
 
 import 'keen-slider/keen-slider.min.css'
@@ -12,7 +11,6 @@ import { CaretLeft, CaretRight } from 'phosphor-react';
 
 export function Home() {
   const [gameList, setGameList] = useState<GameModel[]>([]);
-  const [createAdModalIsOpen, setCreateAdModalIsOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -46,7 +44,7 @@ export function Home() {
   useEffect(() => {
     axios.get('http://localhost:3333/api/v1/games')
       .then(({ data }) => setGameList(data))
-  }, [createAdModalIsOpen]);
+  }, []);
 
   return (
     <div className="max-w-[1344px] w-[90vw] m-auto flex flex-col items-center justify-between h-screen py-16 gap-4">
@@ -69,7 +67,9 @@ export function Home() {
           />
         </button>
         
-        <div ref={sliderRef} className="keen-slider">
+        {gameList.length === 0 ? 
+          <p>Carregando...</p>
+        : <div ref={sliderRef} className="keen-slider">
           {gameList.map(game => (
             <GameBanner
               key={game.id}
@@ -78,7 +78,7 @@ export function Home() {
               title={game.title}
             />
           ))}
-        </div>
+        </div>}
         
         <button
           disabled={instanceRef.current !== null && instanceRef.current.track.details !== null ? currentSlide === instanceRef.current.track.details.slides.length - 1 : true}
